@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  cars-app:
+    image: cars-app-2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+      ports:
+      - 8000:8000
+
+
