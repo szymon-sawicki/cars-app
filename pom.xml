@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.szymon</groupId>
-    <artifactId>cars-app-2</artifactId>
+    <artifactId>cars-app</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
 
