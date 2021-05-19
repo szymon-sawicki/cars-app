@@ -26,18 +26,14 @@
         <junit-platform-engine.version>1.7.0</junit-platform-engine.version>
         <junit-platform-launcher.version>1.7.0</junit-platform-launcher.version>
         <junit-jupiter-engine.version>5.7.0</junit-jupiter-engine.version>
-        <junit-vintage-engine.version>5.7.1</junit-vintage-engine.version>
-        <junit-jupiter-params.version>5.7.0</junit-jupiter-params.version>
-        <mockito-core.version>3.6.0</mockito-core.version>
-        <mockito-junit-jupiter.version>3.6.0</mockito-junit-jupiter.version>
         <assertj-core.version>3.19.0</assertj-core.version>
         <spring.version>5.3.5</spring.version>
         <spark-core.version>2.9.3</spark-core.version>
         <slf4j.version>1.7.30</slf4j.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 
 
         <!-- WYKAZ PLUGINS KTORE STOSUJEMY W PROJEKCIE -->
-        <flatten.maven.plugin.version>1.1.0</flatten.maven.plugin.version>
         <maven.enforcer.plugin.version>3.0.0-M3</maven.enforcer.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
@@ -79,6 +75,13 @@
                 <artifactId>junit-platform-engine</artifactId>
                 <version>${junit-platform-engine.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+            </dependency>
+
             <!-- pozwala integrowac twoje ide z mechanizmem testow jednostkowych -->
             <dependency>
                 <groupId>org.junit.platform</groupId>
@@ -100,35 +103,7 @@
                 <version>${junit-jupiter-engine.version}</version>
                 <scope>test</scope>
             </dependency>
-            <!-- zapewnia kompatybilnosc wsteczna z JUnit 4 -->
-            <dependency>
-                <groupId>org.junit.vintage</groupId>
-                <artifactId>junit-vintage-engine</artifactId>
-                <version>${junit-vintage-engine.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- do testow parametryzowanych -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-params</artifactId>
-                <version>${junit-jupiter-params.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- dostarcza pewne dodatkowe mechanizmy testowania -->
-            <!-- MOCKITO -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito-core.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- pozwala integorowac mockito z junit -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-junit-jupiter</artifactId>
-                <version>${mockito-junit-jupiter.version}</version>
-                <scope>test</scope>
-            </dependency>
+
             <!-- ASSERTJ  -->
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -166,26 +141,12 @@
             <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
         <!-- zapewnia kompatybilnosc wsteczna z JUnit 4 -->
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-        </dependency>
+
         <!-- do testow parametryzowanych -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
         </dependency>
-        <!-- MOCKITO -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-        </dependency>
-        <!-- pozwala integorowac mockito z junit -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-        </dependency>
-        <!-- ASSERTJ  -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -212,11 +173,6 @@
         <finalName>app</finalName>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>flatten-maven-plugin</artifactId>
-                    <version>${flatten.maven.plugin.version}</version>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
@@ -272,31 +228,6 @@
                     </executions>
                 </plugin>
 
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>flatten-maven-plugin</artifactId>
-                    <configuration>
-                        <flattenMode>bom</flattenMode>
-                    </configuration>
-                    <executions>
-                        <!-- enable flattening -->
-                        <execution>
-                            <id>flatten</id>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>flatten</goal>
-                            </goals>
-                        </execution>
-                        <!-- ensure proper cleanup -->
-                        <execution>
-                            <id>flatten.clean</id>
-                            <phase>clean</phase>
-                            <goals>
-                                <goal>clean</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -308,7 +239,7 @@
                     <source>16</source>
                     <target>16</target>
                 </configuration>
-              </plugin>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
