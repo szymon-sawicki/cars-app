@@ -10,6 +10,7 @@ Docker container can be build with command:
 
 docker-compose up -d --build (doesn't work at the moment)
 
+<<<<<<< HEAD
 ### Technology stack:
 
 Java 16
@@ -24,7 +25,9 @@ Gson
 Build tool:
 Maven
 
+<<<<<<< HEAD
 ### TODO
+
 
 Repair pom.xml (ClassNotFoundException on the start after build)
 
