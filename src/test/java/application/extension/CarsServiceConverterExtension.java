@@ -14,7 +14,7 @@ public class CarsServiceConverterExtension implements ParameterResolver {
 
     @Override
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        var filename = "C:\\KMPROGRAMS\\PRAKTYKA\\cars-app-2\\src\\test\\resources\\car-1.json";
+        var filename = "C:\\KMPROGRAMS\\PRAKTYKA\\cars-app\\src\\test\\resources\\car-1.json";
         return new CarsServiceConverter(filename);
     }
 }

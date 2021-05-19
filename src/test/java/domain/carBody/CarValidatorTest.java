@@ -7,6 +7,7 @@ import com.app.domain.config.validator.Validator;
 import com.app.domain.config.validator.ValidatorException;
 import com.app.domain.engine.Engine;
 import com.app.domain.wheel.Wheel;
+import com.app.domain.wheel.type.TyreType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -74,7 +75,7 @@ public class CarValidatorTest {
 
         var engine = Engine.builder().build();
         var carBody = CarBody.builder().build();
-        var wheel = Wheel.builder().build();
+        var wheel = Wheel.builder().size(15).model("BELO").type(TyreType.SUMMER).build();
 
         var car = Car.builder()
                 .model("MAZDA")

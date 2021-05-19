@@ -6,7 +6,7 @@ public class App {
 
     public static void main(String[] args) {
 
-        var cars = new CarsServiceConverter("C:\\KMPROGRAMS\\PRAKTYKA\\cars-app-2\\src\\test\\resources\\car-1.json")
+        var cars = new CarsServiceConverter("C:\\KMPROGRAMS\\PRAKTYKA\\cars-app\\src\\test\\resources\\car-1.json")
                 .fromJson()
                 .orElseThrow();
 
