@@ -12,6 +12,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Utility class used to achieve encapsulation
+ * @author Szymon Sawicki
+ */
+
 public interface CarUtils {
 
     Function<Car, CarBodyType> toCarBodyType = car -> CarBodyUtils.toType.apply(car.carBody);

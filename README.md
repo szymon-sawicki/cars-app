@@ -8,28 +8,29 @@ REST API have only GET methods to display collection of cars in JSON format (see
 
 Docker container can be build with command:
 
-docker-compose up -d --build (doesn't work at the moment)
+docker-compose up -d --build (doesn't work at the moment - issue is on todo list, problem with pom.xml)
 
-<<<<<<< HEAD
+
 ### Technology stack:
 
-Java 16
+- Java 16  
+- Spark Framework  
+- JUnit 5  
+- AssertJ  
+- Lombok  
+- Gson  
 
-Spring Framework
+Build tool: Maven
 
-JUnit 5
-AssertJ
-Lombok
-Gson
 
-Build tool:
-Maven
-
-<<<<<<< HEAD
 ### TODO
 
 
-Repair pom.xml (ClassNotFoundException on the start after build)
+- Repair pom.xml (ClassNotFoundException on the start after build)  
+- Find better way to display stats in CarsService
+- Make documentation for javadoc
+
+
 
 
 

@@ -1,5 +1,7 @@
 package com.app.application.service;
 
+
+
 import com.app.application.converter.CarsServiceConverter;
 import com.app.application.exception.CarsServiceException;
 import com.app.application.type.SortItem;
@@ -25,9 +27,23 @@ import static java.util.Map.Entry.comparingByValue;
 
 @RequiredArgsConstructor
 
+/**
+ * Main service class used to  manage collection of cars loaded from jsonfile
+ * @author Szymon Sawicki
+ */
+
 public class CarsService {
 
+    /**
+     * filepath to json file
+     */
+
     private String filename;
+
+    /**
+     * list of cars loaded from jsonfile
+     */
+
     List<Car> cars;
 
 

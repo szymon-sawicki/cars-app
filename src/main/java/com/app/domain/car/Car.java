@@ -22,7 +22,13 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 
+/**
+ * Main domain object. Car contains another domain objects as members - Engine, CarBod and Wheel
+ * @author Szymon Sawicki
+ */
+
 public class Car {
+
     String model;
     BigDecimal price;
     int mileage;

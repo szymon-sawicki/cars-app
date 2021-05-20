@@ -23,8 +23,8 @@ public class Stats <T>{
         avg = list.stream().reduce(0,Integer::sum) / listOfInts.size();
         min = list.stream().min(Integer::compareTo).get();
 
-    }*/
+    }*
 
-
+ */
 
 }

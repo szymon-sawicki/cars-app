@@ -9,6 +9,12 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Optional;
 
+/**
+ * Parent class for converters from/to gson format.
+ * Gson is used for converting
+ * @param <T> type of converted object
+ */
+
 public class JsonConverter<T> {
     private final String jsonFilename;
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();

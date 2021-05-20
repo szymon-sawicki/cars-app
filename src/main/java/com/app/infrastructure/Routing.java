@@ -19,7 +19,13 @@ import static spark.Spark.*;
 
 @RequiredArgsConstructor
 
+/**
+ * Main controller class used to manage requests
+ *
+ */
+
 public class Routing {
+
 
     private final CarsService carsService;
 
@@ -31,9 +37,9 @@ public class Routing {
         path("/cars/", () -> {
 
                     /**
-                     *  param - sorting item
-                     *  queryParam - direction of sorting - boolean(descending when true)
-                     *  return sorted list of cars
+                     *  @param  request item -sorting item
+                     *  @param  query reversed - direction of sorting - boolean(descending when true)
+                     *  @return sorted list of cars
                      */
 
                     get("/sort/:item",
@@ -46,10 +52,10 @@ public class Routing {
                             }, new JsonTransformer());
 
                     /**
-                     *  param - car body type
-                     *  query param - price from
-                     *  query param - price to
-                     *  return list of cars with given body type and price in range
+                     *  @param  request type - car body type
+                     *  @param  query  price_from
+                     *  @param  query price_to
+                     *  @return list of cars with given body type and price in range
                      */
 
                     get("/body_type/:type",
@@ -63,8 +69,8 @@ public class Routing {
                             new JsonTransformer());
 
                     /**
-                     * param - type of engine
-                     * return list of cars with engine oof given type
+                     * @param request engine - type of engine
+                     * @return list of cars with engine oof given type
                      */
 
                     get("/engine_type/:engine",
@@ -77,7 +83,7 @@ public class Routing {
                     );
 
                     /**
-                     * return map with cars as keys and mileage as value
+                     * @return map with cars as keys and mileage as value
                      */
 
                     get("/cars_with_mileage/",
@@ -87,7 +93,7 @@ public class Routing {
                             }, new JsonTransformer());
 
                     /**
-                     *  return map with type of tyre as key and number of cars having that type as value
+                     *  @return map with type of tyre as key and number of cars having that type as value
                      */
 
                     get("/tyre_type_statistics/",
@@ -99,8 +105,8 @@ public class Routing {
                     );
 
                     /**
-                     * param - list of components (String in format "COMPONENT1, COMPONENT2)
-                     * return list of cars containing that components
+                     * @param request components - list of components (String in format "COMPONENT1, COMPONENT2)
+                     * @return list of cars containing that components
                      */
 
                     get("/cars_with_given_components/:components",
@@ -115,6 +121,9 @@ public class Routing {
                 }
         );
 
+        /**
+         * exception handling
+         */
 
         exception(CarsServiceException.class, (exception, request, response) -> {
             response.redirect("/error/" + exception.getMessage(), 301);
