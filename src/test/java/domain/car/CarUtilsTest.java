@@ -81,7 +81,7 @@ public class CarUtilsTest {
                 .mileage(1000)
                 .build();
 
-        assertThat(CarUtils.toMileage.apply(car))
+        assertThat(CarUtils.toMileage.applyAsInt(car))
                 .isEqualTo(1000);
 
     }

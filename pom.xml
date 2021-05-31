@@ -168,6 +168,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections</artifactId>
+            <version>11.0.0.M2</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>app</finalName>
@@ -193,16 +198,6 @@
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${maven.assembly.plugin.version}</version>
                 </plugin>
-                <!--
-                    Dzieki temu pluginowi podczas budowania / zarzadzania twoja aplikacja masz dokladnie kontrolowane
-                    czy wersje narzedzi ktore sa wtedy wykorzystywane sa w takich wersjach jak sobie zalozyles
-
-                    Tutaj masz wykaz wszystkich dostepnych rules:
-                    https://maven.apache.org/enforcer/enforcer-rules/index.html
-
-                    Tutaj masz przyklady jak okreslac wersje:
-                    https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
-                -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
@@ -227,7 +222,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
             </plugins>
         </pluginManagement>
         <plugins>
@@ -254,29 +248,28 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven.dependency.plugin.version}</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.app.App</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>unpack</id>
-                        <!-- w momencie kiedy wywolasz mvn clean package to jhar zostanie rozbity na podelementy -->
+                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>unpack</goal>
+                            <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
 
     </build>

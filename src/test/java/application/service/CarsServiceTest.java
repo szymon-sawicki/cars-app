@@ -3,9 +3,8 @@ package application.service;
 import application.extension.CarsServiceExtension;
 import com.app.application.exception.CarsServiceException;
 import com.app.application.service.CarsService;
-import com.app.application.service.CarsServiceUtils;
+import com.app.application.service.util.CarsServiceUtils;
 import com.app.application.type.SortItem;
-import com.app.domain.car.CarUtils;
 import com.app.domain.engine.type.EngineType;
 import com.app.domain.wheel.type.TyreType;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.app.domain.car.CarUtils.*;

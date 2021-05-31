@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 /**
  * Utility class used to achieve encapsulation
@@ -22,7 +23,7 @@ public interface CarUtils {
     Function<Car, CarBodyType> toCarBodyType = car -> CarBodyUtils.toType.apply(car.carBody);
     Function<Car, List<String>> toListOfComponents = car -> CarBodyUtils.toComponents.apply(car.carBody);
 
-    Function<Car, Integer> toEnginePower = car -> EngineUtils.toEnginePower.apply(car.engine);
+    ToIntFunction<Car> toEnginePower = car -> EngineUtils.toEnginePower.apply(car.engine);
     Function<Car, EngineType> toEngineType = car -> EngineUtils.toEngineType.apply(car.engine);
 
     Function<Car, Integer> toWheelSize = car -> WheelUtils.toWheelSize.apply(car.wheel);
@@ -30,7 +31,7 @@ public interface CarUtils {
 
     Function<Car, String> toModel = car -> car.model;
     Function<Car, BigDecimal> toPrice = car -> car.price;
-    Function<Car, Integer> toMileage = car -> car.mileage;
+    ToIntFunction<Car> toMileage = car -> car.mileage;
 
     Comparator<Car> compareByNumberOfComponents = Comparator.comparing(car -> CarUtils.toListOfComponents.apply(car).size());
     Comparator<Car> compareByPower = Comparator.comparing(CarUtils.toEnginePower::apply);

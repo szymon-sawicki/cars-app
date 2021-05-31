@@ -1,8 +1,8 @@
 # cars-app
 
-Simple web app with REST API for manage collection of cars.  
+Simple web app with rest api for manage collection of cars.  
 Cars can be loaded from file through constructor in CarsService class. Format of input file must be JSON conform.   
-REST API have only GET methods to display collection of cars in JSON format (see javadoc)
+REST API have only get methods to display collection of cars in json format (see javadoc)
 
 ### Installation
 
@@ -25,10 +25,9 @@ Build tool: Maven
 
 ### TODO
 
-
-- Repair pom.xml (ClassNotFoundException on the start after build)  
-- Find better way to display stats in CarsService
-- Make documentation for javadoc
+- fix stats classes in service
+- write tests for new stats classes
+- make documentation for javadoc
 
 
 

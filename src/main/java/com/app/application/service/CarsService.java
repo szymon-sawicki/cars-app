@@ -4,6 +4,8 @@ package com.app.application.service;
 
 import com.app.application.converter.CarsServiceConverter;
 import com.app.application.exception.CarsServiceException;
+import com.app.application.service.data.CarStats;
+import com.app.application.service.data.generic.Stats;
 import com.app.application.type.SortItem;
 import com.app.application.type.StatsItem;
 import com.app.domain.car.Car;
@@ -14,6 +16,7 @@ import com.app.domain.engine.type.EngineType;
 import com.app.domain.wheel.WheelUtils;
 import com.app.domain.wheel.type.TyreType;
 import lombok.RequiredArgsConstructor;
+import org.eclipse.collections.impl.collector.Collectors2;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -65,8 +68,6 @@ public class CarsService {
         this.cars = new CarsServiceConverter(filename)
                 .fromJson()
                 .orElseThrow(() -> new JsonConverterException("cannot parse json file"));
-
-
     }
 
     /**
@@ -145,83 +146,30 @@ public class CarsService {
 
     //TODO jak fajnie zwrócić statystyki ?  Osobny obiekt ?
 
-    public void getStats(StatsItem statsItem) {
+    public CarStats getStats() {
 
-        if (statsItem == null) {
-            throw new CarsServiceException("stats item is null");
-        }
+        var priceStats = cars
+                .stream()
+                .collect(Collectors2.summarizingBigDecimal(toPrice));
 
-        switch (statsItem) {
-            case PRICE -> System.out.println(priceStats());
-            case MILEAGE -> System.out.println(mileageStats());
-            case ENGINE_POWER -> System.out.println(mileageStats());
-        }
+        var mileageStats = cars
+                .stream()
+                .collect(Collectors.summarizingInt(toMileage));
 
+        var powerStats = cars
+                .stream()
+                .collect(Collectors.summarizingInt(toEnginePower));
+
+        return CarStats
+                .builder()
+                .price(Stats.<BigDecimal>builder().min().max().avg().build())
+                .power(Stats.toDoubleStats(powerStats))
+                .build();
     }
 
 
-    public String priceStats() {
-
-        var min = cars.stream().map(toPrice).min(BigDecimal::compareTo).get();
-        var average = getAveragePrice();
-        var max = cars.stream().map(toPrice).max(BigDecimal::compareTo).get();
-
-        return "MIN: " + min + ". AVERAGE: " + average + ". MAX: " + max;
-
-    }
-
-    public String mileageStats() {
 
 
-        var min = cars.stream().map(toMileage).min(Integer::compareTo).get();
-        var average = getAverageMileage();
-        var max = cars.stream().map(toMileage).max(Integer::compareTo).get();
-
-        return "MIN: " + min + ". AVERAGE: " + average + ". MAX: " + max;
-
-    }
-
-    public String powerStats() {
-
-
-        var min = cars.stream().map(toEnginePower).min(Integer::compareTo).get();
-        var average = getAveragePower();
-        var max = cars.stream().map(toEnginePower).max(Integer::compareTo).get();
-
-        return "MIN: " + min + ". AVERAGE: " + average + ". MAX: " + max;
-
-    }
-
-    private float getAverageMileage() {
-
-        var sum = cars.stream()
-                .map(toMileage::apply)
-                .reduce(0, Integer::sum);
-
-        return sum / cars.size();
-
-    }
-
-    private float getAveragePower() {
-
-        var sum = cars.stream()
-                .map(toEnginePower::apply)
-                .reduce(0, Integer::sum);
-
-        return sum / cars.size();
-
-    }
-
-    private BigDecimal getAveragePrice() {
-
-        var sum = cars.stream()
-                .map(toPrice::apply)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-
-        return sum.divide(new BigDecimal(cars.size()), 2, RoundingMode.HALF_DOWN);
-
-    }
 
     /**
      * @return map with car as key and their mileage as value
@@ -233,7 +181,7 @@ public class CarsService {
                 .sorted(compareByMileage)
                 .collect(
                         LinkedHashMap::new,
-                        (map, car) -> map.put(car, toMileage.apply(car)),
+                        (map, car) -> map.put(car, toMileage.applyAsInt(car)),
                         Map::putAll);
 
     }

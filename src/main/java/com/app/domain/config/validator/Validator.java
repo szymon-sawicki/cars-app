@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public interface Validator<T> {
 
     /**
-     * Implementations of that method are used to exact validation of objects
+     * Implementations of that method are used to validation of objects
      * @param t object to validate
      * @return map with errors (key - place of error, value - error message)
      */
