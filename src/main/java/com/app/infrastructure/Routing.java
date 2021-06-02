@@ -48,7 +48,7 @@ public class Routing {
                                 var itemEnum = SortItem.valueOf(sortItem.toUpperCase(Locale.ROOT));
                                 var reversed = request.queryParams("reversed");
                                 response.header("Content-Type", "application/json;charset=utf-8");
-                                return carsService.sort(itemEnum, Boolean.parseBoolean(reversed));
+                                return ResponseDto.toResponse(carsService.sort(itemEnum, Boolean.parseBoolean(reversed)));
                             }, new JsonTransformer());
 
                     /**
@@ -64,7 +64,7 @@ public class Routing {
                                 var priceFrom = new BigDecimal(request.queryParams("price_from"));
                                 var priceTo = new BigDecimal(request.queryParams("price_to"));
                                 response.header("Content-Type", "application/json;charset=utf-8");
-                                return carsService.findCarsWithBodyTypeAndPriceInRange(bodyType, priceFrom, priceTo);
+                                return ResponseDto.toResponse(carsService.findCarsWithBodyTypeAndPriceInRange(bodyType, priceFrom, priceTo));
                             },
                             new JsonTransformer());
 
@@ -77,7 +77,7 @@ public class Routing {
                             (request, response) -> {
                                 var engineType = EngineType.valueOf(request.params("engine").toUpperCase(Locale.ROOT));
                                 response.header("Content-Type", "application/json;charset=utf-8");
-                                return carsService.findAndSortCarsWithEngineType(engineType);
+                                return ResponseDto.toResponse(carsService.findAndSortCarsWithEngineType(engineType));
 
                             }, new JsonTransformer()
                     );
@@ -89,7 +89,7 @@ public class Routing {
                     get("/cars_with_mileage/",
                             (request, response) -> {
                                 response.header("Content-Type", "application/json;charset=utf-8");
-                                return carsService.carsWithMileage();
+                                return ResponseDto.toResponse(carsService.carsWithMileage());
                             }, new JsonTransformer());
 
                     /**
@@ -99,7 +99,7 @@ public class Routing {
                     get("/tyre_type_statistics/",
                             (request, response) -> {
                                 response.header("Content-Type", "application/json;charset=utf-8");
-                                return carsService.tyreTypesWithCount();
+                                return ResponseDto.toResponse(carsService.tyreTypesWithCount());
                             }, new JsonTransformer()
 
                     );
@@ -113,7 +113,7 @@ public class Routing {
                             (request, response) -> {
                                 response.header("Content-Type", "application/json;charset=utf-8");
                                 var components = Arrays.stream(request.params(":components").split(", ")).toList();
-                                return carsService.findCarsWithGivenComponents(components);
+                                return ResponseDto.toResponse(carsService.findCarsWithGivenComponents(components));
                             }, new JsonTransformer()
 
                     );

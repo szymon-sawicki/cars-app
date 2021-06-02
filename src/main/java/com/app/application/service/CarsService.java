@@ -7,24 +7,18 @@ import com.app.application.exception.CarsServiceException;
 import com.app.application.service.data.CarStats;
 import com.app.application.service.data.generic.Stats;
 import com.app.application.type.SortItem;
-import com.app.application.type.StatsItem;
 import com.app.domain.car.Car;
-import com.app.domain.car.CarUtils;
 import com.app.domain.car_body.type.CarBodyType;
 import com.app.domain.config.converter.JsonConverterException;
 import com.app.domain.engine.type.EngineType;
-import com.app.domain.wheel.WheelUtils;
 import com.app.domain.wheel.type.TyreType;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.collections.impl.collector.Collectors2;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.app.application.type.SortItem.COMPONENTS;
 import static com.app.domain.car.CarUtils.*;
 import static java.util.Map.Entry.comparingByValue;
 
@@ -68,6 +62,15 @@ public class CarsService {
         this.cars = new CarsServiceConverter(filename)
                 .fromJson()
                 .orElseThrow(() -> new JsonConverterException("cannot parse json file"));
+    }
+
+    /**
+     *
+     * @return list of all cars
+     */
+
+    public List<Car> getCars() {
+        return cars;
     }
 
     /**
@@ -144,13 +147,18 @@ public class CarsService {
 
     }
 
-    //TODO jak fajnie zwrócić statystyki ?  Osobny obiekt ?
+    /**
+     *
+     * @return object with included set of stats for price, mileage and power
+     * @see com.app.application.service.data.generic.Stats
+     */
 
     public CarStats getStats() {
 
         var priceStats = cars
                 .stream()
-                .collect(Collectors2.summarizingBigDecimal(toPrice));
+                .map(toPrice)
+                .collect(Collectors2.summarizingBigDecimal(e->e));
 
         var mileageStats = cars
                 .stream()
@@ -162,7 +170,8 @@ public class CarsService {
 
         return CarStats
                 .builder()
-                .price(Stats.<BigDecimal>builder().min().max().avg().build())
+                .price(Stats.toBigDecimalStats(priceStats))
+                .mileage(Stats.toDoubleStats(mileageStats))
                 .power(Stats.toDoubleStats(powerStats))
                 .build();
     }

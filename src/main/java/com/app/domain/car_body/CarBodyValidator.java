@@ -5,6 +5,12 @@ import com.app.domain.config.validator.Validator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implementation of validator interface used to validate CarBody objects
+ * @see com.app.domain.config.validator.Validator
+ * @author Szymon Sawicki
+ */
+
 public class CarBodyValidator implements Validator<CarBody> {
 
     @Override

@@ -31,11 +31,11 @@ public interface CarUtils {
 
     Function<Car, String> toModel = car -> car.model;
     Function<Car, BigDecimal> toPrice = car -> car.price;
-    ToIntFunction<Car> toMileage = car -> car.mileage;
+      ToIntFunction<Car> toMileage = car -> car.mileage;
 
     Comparator<Car> compareByNumberOfComponents = Comparator.comparing(car -> CarUtils.toListOfComponents.apply(car).size());
-    Comparator<Car> compareByPower = Comparator.comparing(CarUtils.toEnginePower::apply);
-    Comparator<Car> compareByMileage = Comparator.comparing(CarUtils.toMileage);
+    Comparator<Car> compareByPower = Comparator.comparing(CarUtils.toEnginePower::applyAsInt);
+    Comparator<Car> compareByMileage = Comparator.comparing(CarUtils.toMileage::applyAsInt);
     Comparator<Car> compareByWheelSize = Comparator.comparing(CarUtils.toWheelSize::apply);
     Comparator<Car> compareByModel = Comparator.comparing(CarUtils.toModel::apply);
 

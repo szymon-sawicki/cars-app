@@ -6,6 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
+/**
+ * Implementation of validator interface used to validate Wheel objects
+ * @see com.app.domain.config.validator.Validator
+ * @author Szymon Sawicki
+ */
+
 public class WheelValidator implements Validator<Wheel> {
 
     @Override

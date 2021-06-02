@@ -24,6 +24,9 @@ import java.util.Objects;
 
 /**
  * Main domain object. Car contains another domain objects as members - Engine, CarBod and Wheel
+ * @see com.app.domain.car_body.CarBody
+ * @see com.app.domain.engine.Engine
+ * @see com.app.domain.wheel.Wheel
  * @author Szymon Sawicki
  */
 

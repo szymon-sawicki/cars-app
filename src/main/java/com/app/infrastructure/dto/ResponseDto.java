@@ -10,10 +10,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 
+/**
+ * Data transfer object used to communication through api
+ * @author Szymon Sawicki
+ */
 
 public class ResponseDto<T> {
 
+    /**
+     * data to be transported
+     */
+
     private T data;
+
+    /**
+     * error message generated when something goes wrong
+     */
 
     @Builder.Default
     private String error = "";

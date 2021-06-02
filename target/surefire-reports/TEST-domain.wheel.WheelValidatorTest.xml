@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="domain.wheel.WheelValidatorTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="domain.wheel.WheelValidatorTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="16+36-2231"/>
@@ -61,8 +61,8 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="domain.wheel.WheelValidatorTest" name="domain.wheel.WheelValidatorTest.test5" time="0"/>
+  <testcase classname="domain.wheel.WheelValidatorTest" name="domain.wheel.WheelValidatorTest.test3" time="0"/>
   <testcase classname="domain.wheel.WheelValidatorTest" name="domain.wheel.WheelValidatorTest.test2" time="0"/>
-  <testcase classname="domain.wheel.WheelValidatorTest" name="domain.wheel.WheelValidatorTest.test3" time="0.001"/>
-  <testcase classname="domain.wheel.WheelValidatorTest" name="domain.wheel.WheelValidatorTest.test4" time="0"/>
   <testcase classname="domain.wheel.WheelValidatorTest" name="domain.wheel.WheelValidatorTest.test1" time="0"/>
+  <testcase classname="domain.wheel.WheelValidatorTest" name="domain.wheel.WheelValidatorTest.test4" time="0"/>
 </testsuite>

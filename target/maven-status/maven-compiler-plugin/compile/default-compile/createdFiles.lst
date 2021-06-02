@@ -3,9 +3,11 @@ com\app\domain\wheel\Wheel.class
 com\app\domain\car\CarValidator.class
 com\app\domain\car_body\CarBody.class
 com\app\application\converter\CarsServiceConverter.class
+com\app\application\service\data\CarStats$CarStatsBuilder.class
 com\app\domain\config\repository\CrudRepository.class
-com\app\application\App.class
+com\app\application\service\data\CarStats.class
 com\app\domain\wheel\WheelUtils.class
+com\app\application\service\data\generic\Stats$StatsBuilder.class
 com\app\domain\engine\type\EngineType.class
 com\app\domain\config\validator\ValidatorException.class
 com\app\domain\car\Car.class
@@ -32,12 +34,10 @@ com\app\domain\engine\Engine$EngineBuilder.class
 com\app\domain\wheel\Wheel$WheelBuilder.class
 com\app\domain\config\converter\JsonConverter.class
 com\app\domain\engine\Engine.class
-com\app\application\type\StatsItem.class
+com\app\application\service\data\generic\Stats.class
 com\app\infrastructure\dto\ResponseDto.class
 com\app\application\type\SortItem.class
 com\app\domain\car_body\CarBody$CarBodyBuilder.class
 com\app\domain\wheel\type\TyreType.class
 com\app\domain\config\value_objects\exception\PriceException.class
 com\app\domain\car\converter\CarJsonConverter.class
-com\app\application\service\Stats.class
-com\app\application\service\CarsServiceUtils.class

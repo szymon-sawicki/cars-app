@@ -12,6 +12,12 @@ import java.util.List;
 @ToString
 @Builder
 
+/**
+ * domain object that is part of main domain object - Car
+ * @see com.app.domain.car.Car
+ * @author Szymon Sawicki
+ */
+
 public class CarBody {
     CarBodyColor color;
     CarBodyType type;

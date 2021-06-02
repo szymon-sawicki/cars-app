@@ -8,6 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
+/**
+ * Implementation of validator interface used to validate Car objects
+ * @see com.app.domain.config.validator.Validator
+ * @author Szymon Sawicki
+ */
+
 public class CarValidator implements Validator<Car> {
     @Override
     public Map<String, String> validate(Car car) {

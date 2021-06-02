@@ -12,6 +12,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+/**
+ * Class used to storing different Stats objects with statistics for mileage, power, price
+ * @see com.app.application.service.data.generic.Stats - object used to storing statistics (min, max, average)
+ * @author
+ */
+
+
 public class CarStats {
     private Stats<Double> mileage;
     private Stats<Double> power;

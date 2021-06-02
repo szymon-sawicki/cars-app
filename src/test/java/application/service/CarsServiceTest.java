@@ -3,7 +3,6 @@ package application.service;
 import application.extension.CarsServiceExtension;
 import com.app.application.exception.CarsServiceException;
 import com.app.application.service.CarsService;
-import com.app.application.service.util.CarsServiceUtils;
 import com.app.application.type.SortItem;
 import com.app.domain.engine.type.EngineType;
 import com.app.domain.wheel.type.TyreType;
@@ -31,7 +30,7 @@ public class CarsServiceTest {
     @DisplayName("when constructor has correct filename as argument")
     public void test1() {
 
-        assertThat(CarsServiceUtils.toListOfCars.apply(carsService))
+        assertThat(carsService.getCars())
                 .isNotEmpty()
                 .hasSize(3);
 
@@ -169,22 +168,19 @@ public class CarsServiceTest {
 
     }
 
-    @Test
-    @DisplayName("when sort item is null")
-    public void test11() {
-
-        assertThatThrownBy(() -> carsService.getStats(null))
-                .isInstanceOf(CarsServiceException.class)
-                .hasMessageContaining("stats item is null");
-
-    }
 
     @Test
     @DisplayName("when price stats are printed")
     public void test12() {
 
-        assertThat(carsService.priceStats())
-                .isEqualTo("MIN: 80. AVERAGE: 116.67. MAX: 150");
+        var stats = carsService.getStats();
+
+        assertThat(stats.getPrice().getMax())
+                .isEqualTo(new BigDecimal("150"));
+        assertThat(stats.getPrice().getMin())
+                .isEqualTo(new BigDecimal("80"));
+        assertThat(stats.getPrice().getAvg())
+                .isEqualTo(new BigDecimal("116.67"));
 
     }
 
@@ -192,8 +188,16 @@ public class CarsServiceTest {
     @DisplayName("when mileage stats are printed")
     public void test13() {
 
-        assertThat(carsService.mileageStats())
-                .isEqualTo("MIN: 10000. AVERAGE: 54000.0. MAX: 140000");
+        var stats = carsService.getStats();
+
+        assertThat(stats.getMileage().getMax())
+                .isEqualTo(140000d);
+
+        assertThat(stats.getMileage().getMin())
+                .isEqualTo(10000d);
+
+        assertThat(stats.getMileage().getAvg())
+                .isEqualTo(54000.0d);
 
     }
 
@@ -201,8 +205,16 @@ public class CarsServiceTest {
     @DisplayName("when engine power stats are printed")
     public void test14() {
 
-        assertThat(carsService.powerStats())
-                .isEqualTo("MIN: 110. AVERAGE: 196.0. MAX: 270");
+        var stats = carsService.getStats();
+
+        assertThat(stats.getPower().getMax())
+                .isEqualTo(270d);
+
+        assertThat(stats.getPower().getMin())
+                .isEqualTo(110d);
+
+        assertThat(stats.getPower().getAvg())
+                .isEqualTo(196.0d);
 
     }
 
